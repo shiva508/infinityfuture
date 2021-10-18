@@ -6,9 +6,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 
 import com.auth0.jwt.JWT;
@@ -34,7 +40,7 @@ public class JWTTokenUtility {
 						   .withExpiresAt(new Date(System.currentTimeMillis()+InfinityFutureSecurityConstant.EXPIRATION_TIME))
 						   .sign(generateAlgorithm(secret));
 						   
-		return null;
+		return jwtToken;
 	}
 
 	public String[] extractClaimsFromUser(UserPrincipal userPrincipal) {
@@ -67,5 +73,27 @@ public class JWTTokenUtility {
 			throw new JWTVerificationException(InfinityFutureSecurityConstant.TOKEN_CANNOT_BE_VERIFIED);
 		}
 		return jwtVerifier;
+	}
+	
+	public Authentication buildAuthenticationObject(String username,List<GrantedAuthority> grantedAuthorities,HttpServletRequest httpServletRequest) {
+		UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(username, null, grantedAuthorities);
+		authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+		return authenticationToken;
+		
+	}
+	
+	public boolean isTokenValid(String username,String token) {
+		JWTVerifier jwtVerifier=getJwtVerifier();
+		return StringUtils.isNotEmpty(username) && isJwtTokenExpaired(jwtVerifier,token);
+	}
+
+	public boolean isJwtTokenExpaired(JWTVerifier jwtVerifier,String token) {
+		Date expairationDate=jwtVerifier.verify(token).getExpiresAt();
+		return expairationDate.before(new Date());
+	}
+	
+	public String extractSubjectFromToken(String jwtToken) {
+		JWTVerifier jwtVerifier=getJwtVerifier();
+		return jwtVerifier.verify(jwtToken).getSubject();
 	}
 }

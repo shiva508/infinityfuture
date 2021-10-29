@@ -26,7 +26,7 @@ import com.pool.domain.UserPrincipal;
 
 @Component
 public class JWTTokenUtility {
-	@Value("{jwt.secret}")
+	@Value("${jwt.secret}")
 	private String secret;
 	
 	public String generateJwtToken(UserPrincipal userPrincipal) {

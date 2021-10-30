@@ -16,6 +16,7 @@ import com.pool.constant.InfinityFutureConstant;
 import com.pool.domain.User;
 import com.pool.domain.UserPrincipal;
 import com.pool.model.CommonResponse;
+import com.pool.model.exception.EmailExistException;
 import com.pool.repository.user.UserRepository;
 
 @Service
@@ -28,7 +29,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Override
 	@Transactional
 	public User createUser(User user) {
-
+		
+		User isUserExist=userRepository.findByEmail(user.getEmail());
+		if(null !=isUserExist) {
+			throw new EmailExistException(InfinityFutureConstant.EMAIL_EXITS+user.getEmail());
+		}
+		 
 		return userRepository.save(user);
 	}
 

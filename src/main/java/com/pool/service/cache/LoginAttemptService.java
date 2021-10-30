@@ -2,11 +2,7 @@ package com.pool.service.cache;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-
-import javax.annotation.PostConstruct;
-
 import org.springframework.stereotype.Component;
-
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;

@@ -1,0 +1,25 @@
+{
+  "authorities": [
+    "string"
+  ],
+  "email": "dasarishiva1@gmail.com",
+  "firstName": "Shiva",
+  "ifuId": "string",
+  "isActive": true,
+  "isNotLocked": true,
+  "joinDate": "2021-10-30T14:22:58.278Z",
+  "lastLogInDate": "2021-10-30T14:22:58.278Z",
+  "lastLogInDateDisplay": "2021-10-30T14:22:58.278Z",
+  "lastName": "Dasari",
+  "password": "Dasari508201",
+  "profileImage": "string",
+  "roleTest": "string",
+  "roles": [
+    {
+      "name": "string",
+      "roleId": 1
+    }
+  ],
+  "userId": 0,
+  "username": "string"
+}

@@ -41,21 +41,20 @@ public class InfinityfutureSecurityConfiguration extends WebSecurityConfigurerAd
 	@Autowired
 	private JwtAuthorizationFilter jwtAuthorizationFilter;
 
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+		
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
 
 	}
 
 	@Override
 	@Bean
-	protected AuthenticationManager authenticationManager() throws Exception {
-		
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+	
 		return super.authenticationManagerBean();
 	}
 	

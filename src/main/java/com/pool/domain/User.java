@@ -22,7 +22,7 @@ import javax.persistence.Table;
 public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="USER_ID",nullable = false, updatable = false)
+	@Column(name = "USER_ID", nullable = false, updatable = false)
 	private Long userId;
 	private String ifuId;
 	private String firstName;
@@ -34,18 +34,15 @@ public class User implements Serializable {
 	private Date lastLogInDate;
 	private Date lastLogInDateDisplay;
 	private Date joinDate;
-	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
-	@JoinTable(name = "TBL_USER_ROLE",
-	joinColumns = {
-			@JoinColumn(name="USER_ID",referencedColumnName = "USER_ID")
-	},
-	inverseJoinColumns = {
-			@JoinColumn(name="ROLE_ID",referencedColumnName = "ROLE_ID")
-	})
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@JoinTable(name = "TBL_USER_ROLE", joinColumns = {
+			@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID") }, inverseJoinColumns = {
+					@JoinColumn(name = "ROLE_ID", referencedColumnName = "ROLE_ID") })
 	private List<Role> roles;
 	private String[] authorities;
 	private Boolean isActive;
 	private Boolean isNotLocked;
+	private String roleTest;
 
 	public User() {
 
@@ -139,7 +136,6 @@ public class User implements Serializable {
 		this.joinDate = joinDate;
 	}
 
-
 	public String[] getAuthorities() {
 		return authorities;
 	}
@@ -172,5 +168,12 @@ public class User implements Serializable {
 		this.roles = roles;
 	}
 
-	
+	public String getRoleTest() {
+		return roleTest;
+	}
+
+	public void setRoleTest(String roleTest) {
+		this.roleTest = roleTest;
+	}
+
 }

@@ -9,7 +9,10 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,11 +26,15 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.pool.constant.InfinityFutureSecurityConstant;
 import com.pool.domain.UserPrincipal;
+import com.pool.model.Login;
 
 @Component
 public class JWTTokenUtility {
 	@Value("${jwt.secret}")
 	private String secret;
+	
+	@Autowired
+	private AuthenticationManager authenticationManager;
 	
 	public String generateJwtToken(UserPrincipal userPrincipal) {
 		String claims[]=extractClaimsFromUser(userPrincipal);
@@ -95,5 +102,20 @@ public class JWTTokenUtility {
 	public String extractSubjectFromToken(String jwtToken) {
 		JWTVerifier jwtVerifier=getJwtVerifier();
 		return jwtVerifier.verify(jwtToken).getSubject();
+	}
+
+	public void authenticate(Login login) {
+		authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login.getUserName(), login.getPassword()));
+		
+	}
+
+	public HttpHeaders generateJwtHeaders(UserPrincipal userPrincipal) {
+		HttpHeaders httpHeaders=new HttpHeaders();
+		httpHeaders.add(InfinityFutureSecurityConstant.JWT_TOKEN_HEADER, generateJwtToken(userPrincipal));
+		return httpHeaders;
+	}
+	
+	public String generateJwtTokenValue(UserPrincipal userPrincipal) {
+		return generateJwtToken(userPrincipal);
 	}
 }

@@ -3,6 +3,8 @@ package com.pool.service.cache;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.stereotype.Component;
 
 import com.google.common.cache.CacheBuilder;
@@ -48,4 +50,14 @@ public class LoginAttemptService {
 		
 	}
 	
+	
+	
+	public boolean isUserExcededLoginAttempts(String username) {
+		try {
+			return loginLoadingCache.get(username)>=InfinityFutureConstant.NUMBER_OF_LOGIN_ATTEMPTS;
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }

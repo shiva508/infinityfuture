@@ -14,10 +14,17 @@ public class InfinityFutureExceptionHandler {
 
 	@ExceptionHandler(value = EmailExistException.class)
 	public ResponseEntity<CustomErrorResponse> handleGenericNotFoundException(EmailExistException error) {
-		return new ResponseEntity<CustomErrorResponse>(
-				new CustomErrorResponse().setErrorCode(HttpStatus.NOT_FOUND.toString()).setErrorMsg(error.getMessage())
-						.setStatus((HttpStatus.NOT_FOUND.value())).setTimestamp(new Date(System.currentTimeMillis())),
-				HttpStatus.NOT_FOUND);
+		String errorCode = HttpStatus.NOT_FOUND.toString();
+		Integer status = HttpStatus.NOT_FOUND.value();
+
+		return commonException(error.getMessage(), errorCode, status, HttpStatus.NOT_FOUND);
+	}
+
+	private ResponseEntity<CustomErrorResponse> commonException(String error, String errorCode,
+			Integer status, HttpStatus notFound) {
+		return new ResponseEntity<CustomErrorResponse>(new CustomErrorResponse().setErrorCode(errorCode)
+				.setErrorMsg(error).setStatus(status).setTimestamp(new Date(System.currentTimeMillis())),
+				notFound);
 	}
 
 }

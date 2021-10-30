@@ -18,7 +18,7 @@ public class AuthenticationFailureListner {
 		Object userName=credentialsEvent.getAuthentication().getPrincipal();
 		if (userName instanceof String) {
 			String username = (String) userName;
-			
+			loginAttemptService.addUserToAttemotLoginCache(username);
 		}
 	}
 

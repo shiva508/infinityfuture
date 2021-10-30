@@ -2,6 +2,7 @@ package com.pool.util.jwt.filter;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,7 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
 			AccessDeniedException accessDeniedException) throws IOException, ServletException {
 		HttpResponse httpResponse = new HttpResponse().setHttpStatusCode(HttpStatus.UNAUTHORIZED.value())
 				.setHttpStatus(HttpStatus.UNAUTHORIZED).setMessage(InfinityFutureSecurityConstant.FORBIDDEN_MESSAGE)
-				.setReason(HttpStatus.UNAUTHORIZED.getReasonPhrase());
+				.setReason(HttpStatus.UNAUTHORIZED.getReasonPhrase()).setTimeStamp(new Date());
 		
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 		response.setStatus(HttpStatus.UNAUTHORIZED.value());

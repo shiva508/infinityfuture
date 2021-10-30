@@ -2,6 +2,7 @@ package com.pool.util.jwt.filter;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +24,7 @@ public class JwtAuthenticationEntryPoint extends Http403ForbiddenEntryPoint {
 			throws IOException {
 		HttpResponse httpResponse = new HttpResponse().setHttpStatusCode(HttpStatus.FORBIDDEN.value())
 				.setHttpStatus(HttpStatus.FORBIDDEN).setMessage(InfinityFutureSecurityConstant.FORBIDDEN_MESSAGE)
-				.setReason(HttpStatus.FORBIDDEN.getReasonPhrase());
+				.setReason(HttpStatus.FORBIDDEN.getReasonPhrase()).setTimeStamp(new Date());
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 		response.setStatus(HttpStatus.FORBIDDEN.value());
 

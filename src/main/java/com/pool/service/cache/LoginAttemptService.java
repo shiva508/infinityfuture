@@ -3,12 +3,14 @@ package com.pool.service.cache;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.pool.constant.InfinityFutureConstant;
 
-@Component
+@Service
 public class LoginAttemptService {
 
 	private LoadingCache<String,Integer> loginLoadingCache;

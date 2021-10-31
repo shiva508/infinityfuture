@@ -19,6 +19,7 @@ import com.pool.domain.UserPrincipal;
 import com.pool.model.CommonResponse;
 import com.pool.model.exception.EmailExistException;
 import com.pool.repository.user.UserRepository;
+import com.pool.service.email.InfinityFutureEmailService;
 import com.pool.util.jwt.Authority;
 import com.pool.util.jwt.RoleEnum;
 
@@ -31,6 +32,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private InfinityFutureEmailService infinityFutureEmailService;
 	
 	@Override
 	@Transactional
@@ -47,6 +51,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			user.setIsActive(true);
 			user.setRoleTest(RoleEnum.ROLE_USER.name());
 			user.setAuthorities(RoleEnum.ROLE_USER.getAuthorities());
+			//infinityFutureEmailService.sendRegistrationConfirmation(user);
 			return userRepository.save(user);
 		}
 		 

@@ -1,4 +1,4 @@
-package com.pool.util.jwt;
+package com.pool.config.security.jwt;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,9 +24,9 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.pool.constant.InfinityFutureSecurityConstant;
 import com.pool.domain.UserPrincipal;
 import com.pool.model.Login;
+import com.pool.util.InfinityFutureSecurityConstant;
 
 @Component
 public class JWTTokenUtility {

@@ -1,25 +1,25 @@
 {
   "authorities": [
-    "string"
+    "Dev"
   ],
   "email": "dasarishiva1@gmail.com",
   "firstName": "Shiva",
-  "ifuId": "string",
+  "ifuId": "king",
   "isActive": true,
   "isNotLocked": true,
-  "joinDate": "2021-10-30T14:22:58.278Z",
-  "lastLogInDate": "2021-10-30T14:22:58.278Z",
-  "lastLogInDateDisplay": "2021-10-30T14:22:58.278Z",
+    "lastLogInDate": "2022-07-01T02:10:50.761Z",
+  "lastLogInDateDisplay": "2022-07-01T02:10:50.761Z",
+  "joinDate": "2022-07-01T02:10:50.761Z",
   "lastName": "Dasari",
   "password": "Dasari508201",
   "profileImage": "string",
-  "roleTest": "string",
+  "roleTest": "King Maker",
   "roles": [
     {
-      "name": "string",
+      "name": "User",
       "roleId": 1
     }
   ],
   "userId": 0,
-  "username": "string"
+  "username": "508408"
 }

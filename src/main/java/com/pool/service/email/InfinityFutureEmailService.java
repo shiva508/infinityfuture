@@ -8,8 +8,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import com.pool.constant.InfinityFutureConstant;
 import com.pool.domain.User;
+import com.pool.util.InfinityFutureConstant;
 
 @Service
 public class InfinityFutureEmailService {

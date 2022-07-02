@@ -1,4 +1,4 @@
-package com.pool.util.jwt.filter;
+package com.pool.config.security.entrypoint;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -14,8 +14,8 @@ import org.springframework.security.web.authentication.Http403ForbiddenEntryPoin
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pool.constant.InfinityFutureSecurityConstant;
 import com.pool.model.HttpResponse;
+import com.pool.util.InfinityFutureSecurityConstant;
 
 @Component
 public class JwtAuthenticationEntryPoint extends Http403ForbiddenEntryPoint {

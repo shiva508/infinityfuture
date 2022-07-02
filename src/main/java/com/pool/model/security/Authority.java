@@ -1,4 +1,4 @@
-package com.pool.util.jwt;
+package com.pool.model.security;
 
 public class Authority {
 	public static final String[] USER_AUTHORITIES = { "user:read" };

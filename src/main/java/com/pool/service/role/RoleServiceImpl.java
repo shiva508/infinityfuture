@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.pool.constant.InfinityFutureConstant;
 import com.pool.domain.Role;
 import com.pool.model.CommonResponse;
 import com.pool.repository.role.RoleRepository;
+import com.pool.util.InfinityFutureConstant;
 
 @Service
 public class RoleServiceImpl implements RoleService {

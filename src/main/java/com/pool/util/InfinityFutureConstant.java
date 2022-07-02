@@ -1,4 +1,4 @@
-package com.pool.constant;
+package com.pool.util;
 
 public class InfinityFutureConstant {
 	public static final String DELETE_ROLE_MESSAGE = "ROLE DELETED WITH ID:";

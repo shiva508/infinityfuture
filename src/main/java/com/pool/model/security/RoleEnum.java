@@ -1,4 +1,4 @@
-package com.pool.util.jwt;
+package com.pool.model.security;
 
 public enum RoleEnum {
 	ROLE_USER(Authority.USER_AUTHORITIES), 

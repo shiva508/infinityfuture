@@ -13,18 +13,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.pool.constant.InfinityFutureConstant;
+
 import com.pool.domain.User;
 import com.pool.domain.UserPrincipal;
 import com.pool.model.CommonResponse;
 import com.pool.model.exception.EmailExistException;
+import com.pool.model.security.Authority;
+import com.pool.model.security.RoleEnum;
 import com.pool.repository.user.UserRepository;
 import com.pool.service.email.InfinityFutureEmailService;
-import com.pool.util.jwt.Authority;
-import com.pool.util.jwt.RoleEnum;
+import com.pool.util.InfinityFutureConstant;
 
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
 	private Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	@Autowired
@@ -83,23 +84,4 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	public List<User> getUsers() {
 		return userRepository.findAll();
 	}
-
-	@Override
-	@Transactional
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.findByUsername(username);
-		LOGGER.info("{}", user);
-		if (user == null) {
-			LOGGER.error(InfinityFutureConstant.USER_NOT_FOUND_BY_USER_NAME);
-			throw new UsernameNotFoundException(InfinityFutureConstant.USER_NOT_FOUND_BY_USER_NAME);
-		} else {
-			user.setLastLogInDateDisplay(user.getLastLogInDate());
-			user.setLastLogInDate(new Date());
-			userRepository.save(user);
-			UserPrincipal userPrincipal = new UserPrincipal(user);
-			LOGGER.info("USER PRINCIPALE {}",userPrincipal);
-			return userPrincipal;
-		}
-	}
-
 }

@@ -12,11 +12,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.pool.constant.InfinityFutureConstant;
 import com.pool.domain.User;
 import com.pool.domain.UserPrincipal;
 import com.pool.repository.user.UserRepository;
 import com.pool.service.cache.LoginAttemptService;
+import com.pool.util.InfinityFutureConstant;
 
 @Service
 @Qualifier("userDetailsService")

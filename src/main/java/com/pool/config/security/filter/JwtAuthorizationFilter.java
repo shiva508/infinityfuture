@@ -1,4 +1,4 @@
-package com.pool.util.jwt.filter;
+package com.pool.config.security.filter;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,16 +12,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import com.pool.constant.InfinityFutureSecurityConstant;
-import com.pool.util.jwt.JWTTokenUtility;
 
-@Component
+import com.pool.config.security.jwt.JWTTokenUtility;
+import com.pool.util.InfinityFutureSecurityConstant;
+
+
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
 	
 	@Autowired
 	private JWTTokenUtility jwtTokenUtility;
+
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
+
 import com.pool.model.exception.EmailExistException;
 import com.pool.model.exception.response.CustomErrorResponse;
 
@@ -25,6 +27,14 @@ public class InfinityFutureExceptionHandler {
 		return new ResponseEntity<CustomErrorResponse>(new CustomErrorResponse().setErrorCode(errorCode)
 				.setErrorMsg(error).setStatus(status).setTimestamp(new Date(System.currentTimeMillis())),
 				notFound);
+	}
+	
+	@ExceptionHandler(value = NoHandlerFoundException.class)
+	public ResponseEntity<CustomErrorResponse> handleHandlerNotFoundException(NoHandlerFoundException error) {
+		String errorCode = HttpStatus.BAD_REQUEST.toString();
+		Integer status = HttpStatus.BAD_REQUEST.value();
+
+		return commonException(error.getMessage(), errorCode, status, HttpStatus.BAD_REQUEST);
 	}
 
 }

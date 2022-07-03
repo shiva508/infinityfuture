@@ -18,7 +18,7 @@ public interface UserService {
 
 	public List<User> getUsers();
 
-	public CommonResponse resetPassword(String username,String newPassword);
-	
-	public CommonResponse updatePrifileImage(String username,MultipartFile profileEmage);
+	public CommonResponse resetPassword(String username, String newPassword);
+
+	public CommonResponse updatePrifileImage(String username, MultipartFile profileEmage);
 }

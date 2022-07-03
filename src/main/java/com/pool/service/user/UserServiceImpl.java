@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.pool.config.email.handler.EmailTriggerEvent;
@@ -95,5 +96,17 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public List<User> getUsers() {
 		return userRepository.findAll();
+	}
+
+	@Override
+	public CommonResponse resetPassword(String username, String newPassword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CommonResponse updatePrifileImage(String username, MultipartFile profileEmage) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
